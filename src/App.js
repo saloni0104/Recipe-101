@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Recipe from './Recipe';
 
@@ -8,8 +8,8 @@ const App = () => {
   const APP_KEY = '245a754f5b923ec2ec72916fd267222b	';
 
   const [recipes, setRecipes] = useState([]);
-  const[search, setSearch] = useState("");
-  const [ query, setQuery] =useState('lasagna');   // we want to get request only after clicking search button, not just by typing in input box, hence this new state
+  const [search, setSearch] = useState('');
+  const [query, setQuery] = useState('chicken');   // we want to get request only after clicking search button, not just by typing in input box, hence this new state
 
   useEffect(() => {
     getRecipes();
@@ -33,22 +33,22 @@ const App = () => {
   }
 
 
-  return(
+  return (
     <div className="App">
       <form onSubmit={getSearch} className="search-form">
         <input className="search-bar" type="text" value={search} onChange={updateSearch} />
         <button className="search-button" type="submit">Search</button>
       </form>
-      {recipes.map(recipe => (  //parentheses added instead of curly because html had to be added
-        <Recipe
-        key={recipe.recipe.label}
-        title={recipe.recipe.label}
-        calories={recipe.recipe.calories}
-        image={recipe.recipe.image}
-        ingredients={recipe.recipe.ingredients} />   //second recipe is from hits data we fetched, under recipe we had label
-      )
-
-      )}
+      <div className="recipes">
+        {recipes.map(recipe => (  //parentheses added instead of curly because html had to be added
+          <Recipe
+            key={recipe.recipe.label}
+            title={recipe.recipe.label}
+            calories={recipe.recipe.calories}
+            image={recipe.recipe.image}
+            ingredients={recipe.recipe.ingredients} />   //second recipe is from hits data we fetched, under recipe we had label
+        ))}
+      </div>
     </div>
   );
 };
