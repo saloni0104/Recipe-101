@@ -13,7 +13,7 @@ const App = () => {
 
   useEffect(() => {
     getRecipes();
-  }, []);      //second parameter makes sure the the effect produces request only once when application is mounted
+  }, [query]);      //second parameter makes sure the the effect produces request only once when application is mounted, in this case when query runs
 
   const getRecipes = async () => {
     const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`);   // got it from documentation of recipe search app from edamam.com
@@ -24,12 +24,12 @@ const App = () => {
 
   const updateSearch = e => {
     setSearch(e.target.value);
-    console.log(search);
   }
 
   const getSearch = e => {
     e.preventDefault();
-    setQuery=(search);
+    setQuery(search);
+    setSearch('');    //setting search back to empty string
   }
 
 
