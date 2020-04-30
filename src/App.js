@@ -9,7 +9,7 @@ const App = () => {
 
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState('');
-  const [query, setQuery] = useState('chicken');   // we want to get request only after clicking search button, not just by typing in input box, hence this new state
+  const [query, setQuery] = useState('pasta');   // we want to get request only after clicking search button, not just by typing in input box, hence this new state
 
   useEffect(() => {
     getRecipes();
