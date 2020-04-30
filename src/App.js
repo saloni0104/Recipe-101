@@ -9,7 +9,7 @@ const App = () => {
 
   const [recipes, setRecipes] = useState([]);
   const[search, setSearch] = useState("");
-  const [ query, setQuery] =useState('chicken');   // we want to get request only after clicking search button, not just by typing in input box, hence this new state
+  const [ query, setQuery] =useState('lasagna');   // we want to get request only after clicking search button, not just by typing in input box, hence this new state
 
   useEffect(() => {
     getRecipes();
@@ -44,7 +44,8 @@ const App = () => {
         key={recipe.recipe.label}
         title={recipe.recipe.label}
         calories={recipe.recipe.calories}
-        image={recipe.recipe.image} />   //second recipe is from hits data we fetched, under recipe we had label
+        image={recipe.recipe.image}
+        ingredients={recipe.recipe.ingredients} />   //second recipe is from hits data we fetched, under recipe we had label
       )
 
       )}
