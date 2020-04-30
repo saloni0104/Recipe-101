@@ -9,23 +9,34 @@ const App = () => {
 
   const [recipes, setRecipes] = useState([]);
   const[search, setSearch] = useState("");
+  const [ query, setQuery] =useState('chicken');   // we want to get request only after clicking search button, not just by typing in input box, hence this new state
 
   useEffect(() => {
     getRecipes();
   }, []);      //second parameter makes sure the the effect produces request only once when application is mounted
 
   const getRecipes = async () => {
-    const response = await fetch(`https://api.edamam.com/search?q=chicken&app_id=${APP_ID}&app_key=${APP_KEY}`);   // got it from documentation of recipe search app from edamam.com
+    const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`);   // got it from documentation of recipe search app from edamam.com
     const data = await response.json();   // to format it in a way so that we can work easily
     setRecipes(data.hits);   //hits fetched from the whole lot of data from api
     console.log(data.hits);
+  };
+
+  const updateSearch = e => {
+    setSearch(e.target.value);
+    console.log(search);
+  }
+
+  const getSearch = e => {
+    e.preventDefault();
+    setQuery=(search);
   }
 
 
   return(
     <div className="App">
-      <form className="search-form">
-        <input className="search-bar" type="text" value={search} />
+      <form onSubmit={getSearch} className="search-form">
+        <input className="search-bar" type="text" value={search} onChange={updateSearch} />
         <button className="search-button" type="submit">Search</button>
       </form>
       {recipes.map(recipe => (  //parentheses added instead of curly because html had to be added
