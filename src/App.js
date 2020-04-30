@@ -8,6 +8,7 @@ const App = () => {
   const APP_KEY = '245a754f5b923ec2ec72916fd267222b	';
 
   const [recipes, setRecipes] = useState([]);
+  const[search, setSearch] = useState("");
 
   useEffect(() => {
     getRecipes();
@@ -24,11 +25,13 @@ const App = () => {
   return(
     <div className="App">
       <form className="search-form">
-        <input className="search-bar" type="text"/>
+        <input className="search-bar" type="text" value={search} />
         <button className="search-button" type="submit">Search</button>
       </form>
       {recipes.map(recipe => (  //parentheses added instead of curly because html had to be added
-        <Recipe title={recipe.recipe.label}
+        <Recipe
+        key={recipe.recipe.label}
+        title={recipe.recipe.label}
         calories={recipe.recipe.calories}
         image={recipe.recipe.image} />   //second recipe is from hits data we fetched, under recipe we had label
       )
